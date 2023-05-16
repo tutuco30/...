@@ -70,7 +70,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(600, 200)
+  createCanvas(windowWidth, windowHeight)
 
   //sprite de trex
   trex = createSprite(50, 150, 20, 50);
@@ -80,19 +80,20 @@ function setup() {
   trex.setCollider("circle", 0, 0, 43)
   trex.debug = false
   //sprite chão
-  chao = createSprite(300, 180, 600, 20)
+  chao = createSprite(width+5, 180, 600, 20)
   chao.addImage(chaoImg);
   chaoInv = createSprite(200, 190, 600, 15);
   chaoInv.visible = false
+  chao.scale = 1.8
 
   groupCactos = createGroup();
   groupNuvens = createGroup();
 
-  gameOver = createSprite(300, 50)
+  gameOver = createSprite(width/2, 50)
   gameOver.addImage(gameOverImg)
   gameOver.visible = false
 
-  restart = createSprite(300, 130)
+  restart = createSprite(width/2, 130)
   restart.addImage(restartImg)
   restart.visible = false
 
@@ -136,9 +137,9 @@ function draw() {
     }
 
   }
-  text("score: " + score, 400, 20);
+  text("score: " + score, 1800, 20);
   console.log(trex.y);
-  //text(mouseX + "," + mouseY, mouseX, mouseY);
+  text(mouseX + "," + mouseY, mouseX, mouseY);
 
 
 
@@ -159,7 +160,7 @@ function draw() {
 
 function gerarNuvens() {
   if (frameCount % 60 === 0) {
-    var nuvem = createSprite(600, 40, 50, 50);
+    var nuvem = createSprite(width+5, 40, 50, 50);
     nuvem.addImage(nuvemImg);
     nuvem.velocityX = -5
 
@@ -167,14 +168,14 @@ function gerarNuvens() {
     nuvem.y = Math.round(random(10, 100));
 
     nuvem.depth = trex.depth - 1;
-    nuvem.lifetime = 125;
+    nuvem.lifetime = 400;
     groupNuvens.add(nuvem);
 
   }
 }
 function gerarCactos() {
-  if (frameCount % 60 === 0) {
-    var cactos = createSprite(600, 160);
+  if (frameCount % 90 === 0) {
+    var cactos = createSprite(width+5, 160);
     cactos.velocityX = -(7+5*score/100);
     var obstacleRandom = Math.round(random(1, 6));
     switch (obstacleRandom) {
@@ -193,7 +194,7 @@ function gerarCactos() {
       default: break;
     }
     cactos.scale = 0.9;
-    cactos.lifetime = 125;
+    cactos.lifetime = 400 ;
     groupCactos.add(cactos);
   }
 
