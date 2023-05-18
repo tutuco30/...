@@ -110,10 +110,10 @@ function draw() {
     if (chao.x < 0) {
       chao.x = 300
     }
-    if (keyDown("space") && trex.y >= 135.5) {
+    if (touches.lenght>0||keyDown("space") && trex.y >= 135.5) {
       trex.velocityY = -12;
       soundsPulo.play()
-
+       touches = []
     } trex.velocityY = trex.velocityY + 0.8;
     chao.velocityX = -(7+5*score/100);
     score = score + Math.round(getFrameRate() / 60);
